@@ -1,0 +1,65 @@
+[
+  {
+    "id": "image-compressor",
+    "name": "Smart Image Compressor",
+    "category": "Images",
+    "icon": "🖼️",
+    "description": "Compress JPG, PNG & WebP images directly in your browser with real-time preview.",
+    "keywords": ["compress", "reduce size", "photo", "jpg", "png", "webp", "mb to kb"],
+    "badge": "Popular"
+  },
+  {
+    "id": "loan-emi-calculator",
+    "name": "Loan & EMI Calculator",
+    "category": "Calculators",
+    "icon": "💰",
+    "description": "Calculate monthly installment, total interest, and total payable amount with instant breakdown.",
+    "keywords": ["loan", "emi", "mortgage", "home loan", "car loan", "interest", "finance"],
+    "badge": "Essential"
+  },
+  {
+    "id": "age-calculator",
+    "name": "Exact Age & Birthday Countdown",
+    "category": "Everyday",
+    "icon": "🎂",
+    "description": "Calculate your exact age in years, months, days and see how many days until your next birthday.",
+    "keywords": ["age", "birthday", "birth date", "days old", "chronological age"],
+    "badge": "Popular"
+  },
+  {
+    "id": "discount-calculator",
+    "name": "Shopping Discount & Sale",
+    "category": "Calculators",
+    "icon": "🏷️",
+    "description": "Quickly calculate final sale price, extra coupon discounts, and total money saved.",
+    "keywords": ["discount", "sale", "shopping", "coupon", "off", "percentage"],
+    "badge": "New"
+  },
+  {
+    "id": "word-counter",
+    "name": "Word & Character Counter",
+    "category": "Text",
+    "icon": "📝",
+    "description": "Live counts of words, characters, sentences, paragraphs, and reading time.",
+    "keywords": ["words", "characters", "length", "reading time", "essay", "seo", "text"],
+    "badge": "Essential"
+  },
+  {
+    "id": "qr-generator",
+    "name": "Custom QR Code Generator",
+    "category": "Tech & Web",
+    "icon": "📱",
+    "description": "Generate high-resolution QR codes for websites, text, and Wi-Fi networks.",
+    "keywords": ["qr", "qr code", "barcode", "generator", "link to qr", "wifi qr"],
+    "badge": "Popular"
+  },
+  {
+    "id": "password-generator",
+    "name": "Strong Password Generator",
+    "category": "Tech & Web",
+    "icon": "🔐",
+    "description": "Create uncrackable, cryptographically secure passwords with custom rules.",
+    "keywords": ["password", "generator", "security", "passphrase", "random"],
+    "badge": "New"
+  }
+]
