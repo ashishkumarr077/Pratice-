@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Loan & EMI Calculator — OmniTools</title>
+  <title>Strong Password Generator — OmniTools</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans">
-
-  <!-- TOP BAR -->
   <header class="border-b bg-white border-slate-200">
     <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
       <a href="../../index.html" class="flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-indigo-600 transition-colors">
@@ -21,126 +19,106 @@
     </div>
   </header>
 
-  <!-- TOOL CONTENT -->
   <main class="max-w-4xl mx-auto px-4 py-8 flex-1 w-full">
-    <div class="mb-6">
-      <div class="flex items-center gap-3">
-        <span class="text-3xl">💰</span>
-        <div>
-          <h1 class="text-2xl font-black text-slate-900">Loan & EMI Calculator</h1>
-          <p class="text-sm text-slate-500">Calculate your monthly EMI, total interest, and full repayment cost in real-time.</p>
-        </div>
+    <div class="mb-6 flex items-center gap-3">
+      <span class="text-3xl">🔐</span>
+      <div>
+        <h1 class="text-2xl font-black text-slate-900">Strong Password Generator</h1>
+        <p class="text-sm text-slate-500">Generate uncrackable passwords using your browser's cryptographic randomness.</p>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- INPUT FORM -->
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
-        <div>
-          <div class="flex justify-between items-center mb-1">
-            <label class="text-xs font-bold text-slate-700">Loan Amount</label>
-            <span id="amountDisplay" class="text-sm font-extrabold text-indigo-600">$100,000</span>
-          </div>
-          <input type="range" id="loanAmount" min="5000" max="1000000" step="5000" value="100000" class="w-full accent-indigo-600 cursor-pointer" />
-          <div class="flex justify-between text-[11px] text-slate-400 mt-1">
-            <span>$5K</span>
-            <span>$500K</span>
-            <span>$1M</span>
-          </div>
-        </div>
-
-        <div>
-          <div class="flex justify-between items-center mb-1">
-            <label class="text-xs font-bold text-slate-700">Interest Rate (Annual %)</label>
-            <span id="rateDisplay" class="text-sm font-extrabold text-indigo-600">8.5%</span>
-          </div>
-          <input type="range" id="interestRate" min="1" max="25" step="0.1" value="8.5" class="w-full accent-indigo-600 cursor-pointer" />
-          <div class="flex justify-between text-[11px] text-slate-400 mt-1">
-            <span>1%</span>
-            <span>12%</span>
-            <span>25%</span>
-          </div>
-        </div>
-
-        <div>
-          <div class="flex justify-between items-center mb-1">
-            <label class="text-xs font-bold text-slate-700">Loan Tenure</label>
-            <span id="tenureDisplay" class="text-sm font-extrabold text-indigo-600">5 Years (60 Mo)</span>
-          </div>
-          <input type="range" id="loanTenure" min="1" max="30" step="1" value="5" class="w-full accent-indigo-600 cursor-pointer" />
-          <div class="flex justify-between text-[11px] text-slate-400 mt-1">
-            <span>1 Year</span>
-            <span>15 Years</span>
-            <span>30 Years</span>
-          </div>
-        </div>
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+      <!-- PASSWORD DISPLAY -->
+      <div class="relative flex items-center">
+        <input type="text" id="passDisplay" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3.5 font-mono text-base font-bold text-slate-800 tracking-wider focus:outline-none" />
+        <button id="copyPassBtn" class="absolute right-2 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold transition-all shadow-sm">
+          Copy
+        </button>
       </div>
 
-      <!-- RESULTS SUMMARY -->
-      <div class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white p-6 rounded-2xl shadow-lg flex flex-col justify-between">
+      <!-- CONTROLS -->
+      <div class="space-y-4">
         <div>
-          <span class="text-xs font-semibold tracking-wider uppercase text-indigo-300">Monthly Payment</span>
-          <div id="emiResult" class="text-4xl font-black text-white mt-1">$2,051.65</div>
-          <p class="text-xs text-indigo-200 mt-1">Estimated monthly installment (EMI)</p>
+          <div class="flex justify-between items-center mb-1">
+            <span class="text-xs font-bold text-slate-700">Password Length</span>
+            <span id="lengthDisplay" class="text-xs font-black text-indigo-600">16 characters</span>
+          </div>
+          <input type="range" id="passLength" min="8" max="40" value="16" class="w-full accent-indigo-600 cursor-pointer" />
         </div>
 
-        <div class="grid grid-cols-2 gap-4 pt-6 border-t border-indigo-800/80 mt-6">
-          <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
-            <span class="text-[11px] text-indigo-300 font-medium">Principal Amount</span>
-            <div id="principalResult" class="text-lg font-bold text-white mt-0.5">$100,000</div>
-          </div>
-          <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
-            <span class="text-[11px] text-amber-300 font-medium">Total Interest</span>
-            <div id="interestTotalResult" class="text-lg font-bold text-amber-400 mt-0.5">$23,099</div>
-          </div>
-          <div class="col-span-2 bg-indigo-950/80 p-3 rounded-xl border border-indigo-700">
-            <span class="text-[11px] text-indigo-200 font-medium">Total Payable (Principal + Interest)</span>
-            <div id="totalPaymentResult" class="text-xl font-black text-white mt-0.5">$123,099</div>
-          </div>
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+            <input type="checkbox" id="includeUpper" checked class="accent-indigo-600 w-4 h-4 rounded" />
+            <span>Uppercase (A-Z)</span>
+          </label>
+          <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+            <input type="checkbox" id="includeLower" checked class="accent-indigo-600 w-4 h-4 rounded" />
+            <span>Lowercase (a-z)</span>
+          </label>
+          <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+            <input type="checkbox" id="includeNumbers" checked class="accent-indigo-600 w-4 h-4 rounded" />
+            <span>Numbers (0-9)</span>
+          </label>
+          <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+            <input type="checkbox" id="includeSymbols" checked class="accent-indigo-600 w-4 h-4 rounded" />
+            <span>Symbols (!@#$%)</span>
+          </label>
         </div>
+
+        <button id="regenBtn" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all">
+          🔄 Generate New Password
+        </button>
       </div>
     </div>
   </main>
 
   <script>
-    const amountInput = document.getElementById('loanAmount');
-    const rateInput = document.getElementById('interestRate');
-    const tenureInput = document.getElementById('loanTenure');
+    const passDisplay = document.getElementById('passDisplay');
+    const passLength = document.getElementById('passLength');
+    const lengthDisplay = document.getElementById('lengthDisplay');
+    const includeUpper = document.getElementById('includeUpper');
+    const includeLower = document.getElementById('includeLower');
+    const includeNumbers = document.getElementById('includeNumbers');
+    const includeSymbols = document.getElementById('includeSymbols');
+    const copyPassBtn = document.getElementById('copyPassBtn');
+    const regenBtn = document.getElementById('regenBtn');
 
-    const amountDisplay = document.getElementById('amountDisplay');
-    const rateDisplay = document.getElementById('rateDisplay');
-    const tenureDisplay = document.getElementById('tenureDisplay');
+    function generatePassword() {
+      const len = parseInt(passLength.value, 10);
+      lengthDisplay.textContent = len + ' characters';
 
-    const emiResult = document.getElementById('emiResult');
-    const principalResult = document.getElementById('principalResult');
-    const interestTotalResult = document.getElementById('interestTotalResult');
-    const totalPaymentResult = document.getElementById('totalPaymentResult');
+      let chars = '';
+      if (includeUpper.checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      if (includeLower.checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+      if (includeNumbers.checked) chars += '0123456789';
+      if (includeSymbols.checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
 
-    function calculateEMI() {
-      const p = parseFloat(amountInput.value);
-      const annualR = parseFloat(rateInput.value);
-      const years = parseFloat(tenureInput.value);
+      if (!chars) {
+        passDisplay.value = 'Select at least 1 option!';
+        return;
+      }
 
-      amountDisplay.textContent = '$' + p.toLocaleString();
-      rateDisplay.textContent = annualR.toFixed(1) + '%';
-      tenureDisplay.textContent = `${years} Year${years > 1 ? 's' : ''} (${years * 12} Mo)`;
-
-      const monthlyR = (annualR / 12) / 100;
-      const n = years * 12;
-
-      // EMI Formula: P * r * (1 + r)^n / ((1 + r)^n - 1)
-      const emi = (p * monthlyR * Math.pow(1 + monthlyR, n)) / (Math.pow(1 + monthlyR, n) - 1);
-      const totalPayment = emi * n;
-      const totalInterest = totalPayment - p;
-
-      emiResult.textContent = '$' + emi.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      principalResult.textContent = '$' + p.toLocaleString();
-      interestTotalResult.textContent = '$' + Math.round(totalInterest).toLocaleString();
-      totalPaymentResult.textContent = '$' + Math.round(totalPayment).toLocaleString();
+      // Cryptographically secure generation
+      const array = new Uint32Array(len);
+      window.crypto.getRandomValues(array);
+      let pwd = '';
+      for (let i = 0; i < len; i++) {
+        pwd += chars[array[i] % chars.length];
+      }
+      passDisplay.value = pwd;
     }
 
-    [amountInput, rateInput, tenureInput].forEach(inp => inp.addEventListener('input', calculateEMI));
-    calculateEMI();
+    [passLength, includeUpper, includeLower, includeNumbers, includeSymbols].forEach(inp => inp.addEventListener('input', generatePassword));
+    regenBtn.addEventListener('click', generatePassword);
+
+    copyPassBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(passDisplay.value);
+      copyPassBtn.textContent = 'Copied!';
+      setTimeout(() => copyPassBtn.textContent = 'Copy', 1500);
+    });
+
+    generatePassword();
   </script>
 </body>
 </html>
