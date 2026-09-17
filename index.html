@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Exact Age & Birthday Countdown — OmniTools</title>
+  <title>Shopping Discount Calculator — OmniTools</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans">
@@ -20,46 +20,44 @@
   </header>
 
   <main class="max-w-4xl mx-auto px-4 py-8 flex-1 w-full">
-    <div class="mb-6">
-      <div class="flex items-center gap-3">
-        <span class="text-3xl">🎂</span>
-        <div>
-          <h1 class="text-2xl font-black text-slate-900">Exact Age & Birthday Countdown</h1>
-          <p class="text-sm text-slate-500">Calculate chronological age in years, months, and days, plus next birthday countdown.</p>
-        </div>
+    <div class="mb-6 flex items-center gap-3">
+      <span class="text-3xl">🏷️</span>
+      <div>
+        <h1 class="text-2xl font-black text-slate-900">Shopping Discount Calculator</h1>
+        <p class="text-sm text-slate-500">Calculate final price after store discounts and extra coupon codes.</p>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Date of Birth</label>
-          <input type="date" id="dobInput" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-indigo-600" />
+          <label class="block text-xs font-bold text-slate-700 mb-1">Original Price ($)</label>
+          <input type="number" id="origPrice" value="120" min="0" step="any" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-lg font-bold focus:outline-none focus:border-indigo-600" />
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Age as of Date</label>
-          <input type="date" id="targetDateInput" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:border-indigo-600" />
+          <label class="block text-xs font-bold text-slate-700 mb-1">Primary Discount (%)</label>
+          <input type="number" id="discPercent" value="30" min="0" max="100" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-lg font-bold focus:outline-none focus:border-indigo-600" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Additional Coupon / Promo (%) [Optional]</label>
+          <input type="number" id="extraCoupon" value="5" min="0" max="100" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-lg font-bold focus:outline-none focus:border-indigo-600" />
         </div>
       </div>
 
-      <div class="md:col-span-2 bg-gradient-to-br from-indigo-900 to-slate-900 text-white p-6 rounded-2xl shadow-lg flex flex-col justify-between">
+      <div class="bg-gradient-to-br from-emerald-900 to-slate-900 text-white p-6 rounded-2xl shadow-lg flex flex-col justify-between">
         <div>
-          <span class="text-xs font-semibold tracking-wider uppercase text-indigo-300">Your Current Age</span>
-          <div id="mainAgeText" class="text-3xl font-black text-white mt-1">Select your birth date</div>
+          <span class="text-xs font-semibold tracking-wider uppercase text-emerald-300">Final Price You Pay</span>
+          <div id="finalPrice" class="text-4xl font-black text-white mt-1">$79.80</div>
         </div>
 
-        <div class="grid grid-cols-3 gap-3 pt-6 border-t border-indigo-800/80 mt-6 text-center">
-          <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
-            <span class="text-[10px] text-indigo-300 uppercase font-semibold">Total Days</span>
-            <div id="totalDays" class="text-lg font-bold text-white mt-0.5">-</div>
+        <div class="grid grid-cols-2 gap-4 pt-6 border-t border-emerald-800/80 mt-6">
+          <div class="bg-emerald-950/60 p-3 rounded-xl border border-emerald-800/50">
+            <span class="text-[11px] text-emerald-300 font-medium">You Save</span>
+            <div id="totalSaved" class="text-xl font-bold text-emerald-400 mt-0.5">$40.20</div>
           </div>
-          <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
-            <span class="text-[10px] text-indigo-300 uppercase font-semibold">Total Hours</span>
-            <div id="totalHours" class="text-lg font-bold text-white mt-0.5">-</div>
-          </div>
-          <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
-            <span class="text-[10px] text-amber-300 uppercase font-semibold">Next Birthday In</span>
-            <div id="nextBirthday" class="text-lg font-bold text-amber-300 mt-0.5">-</div>
+          <div class="bg-emerald-950/60 p-3 rounded-xl border border-emerald-800/50">
+            <span class="text-[11px] text-emerald-300 font-medium">Effective Discount</span>
+            <div id="effectiveRate" class="text-xl font-bold text-white mt-0.5">33.5% OFF</div>
           </div>
         </div>
       </div>
@@ -67,62 +65,31 @@
   </main>
 
   <script>
-    const dobInput = document.getElementById('dobInput');
-    const targetDateInput = document.getElementById('targetDateInput');
-    const mainAgeText = document.getElementById('mainAgeText');
-    const totalDays = document.getElementById('totalDays');
-    const totalHours = document.getElementById('totalHours');
-    const nextBirthday = document.getElementById('nextBirthday');
+    const origPrice = document.getElementById('origPrice');
+    const discPercent = document.getElementById('discPercent');
+    const extraCoupon = document.getElementById('extraCoupon');
 
-    // Default to today and a sample DOB
-    const today = new Date();
-    targetDateInput.value = today.toISOString().split('T')[0];
-    dobInput.value = '2000-01-01';
+    const finalPrice = document.getElementById('finalPrice');
+    const totalSaved = document.getElementById('totalSaved');
+    const effectiveRate = document.getElementById('effectiveRate');
 
-    function calculateAge() {
-      if (!dobInput.value || !targetDateInput.value) return;
+    function calcDiscount() {
+      const price = parseFloat(origPrice.value) || 0;
+      const d1 = parseFloat(discPercent.value) || 0;
+      const d2 = parseFloat(extraCoupon.value) || 0;
 
-      const birth = new Date(dobInput.value);
-      const target = new Date(targetDateInput.value);
+      const priceAfterFirst = price - (price * (d1 / 100));
+      const final = priceAfterFirst - (priceAfterFirst * (d2 / 100));
+      const saved = price - final;
+      const eff = price > 0 ? (saved / price) * 100 : 0;
 
-      if (birth > target) {
-        mainAgeText.textContent = "Birth date must be in past!";
-        return;
-      }
-
-      let years = target.getFullYear() - birth.getFullYear();
-      let months = target.getMonth() - birth.getMonth();
-      let days = target.getDate() - birth.getDate();
-
-      if (days < 0) {
-        months--;
-        const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
-
-      mainAgeText.textContent = `${years} Years, ${months} Months, ${days} Days`;
-
-      const diffTime = target - birth;
-      const daysCount = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-      totalDays.textContent = daysCount.toLocaleString();
-      totalHours.textContent = (daysCount * 24).toLocaleString();
-
-      // Next birthday countdown
-      let nextBday = new Date(target.getFullYear(), birth.getMonth(), birth.getDate());
-      if (nextBday < target) {
-        nextBday.setFullYear(target.getFullYear() + 1);
-      }
-      const bdayDiff = Math.ceil((nextBday - target) / (1000 * 60 * 60 * 24));
-      nextBirthday.textContent = `${bdayDiff} Days`;
+      finalPrice.textContent = '$' + final.toFixed(2);
+      totalSaved.textContent = '$' + saved.toFixed(2);
+      effectiveRate.textContent = eff.toFixed(1) + '% OFF';
     }
 
-    dobInput.addEventListener('change', calculateAge);
-    targetDateInput.addEventListener('change', calculateAge);
-    calculateAge();
+    [origPrice, discPercent, extraCoupon].forEach(inp => inp.addEventListener('input', calcDiscount));
+    calcDiscount();
   </script>
 </body>
 </html>
